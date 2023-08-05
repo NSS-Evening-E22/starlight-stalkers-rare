@@ -1,0 +1,104 @@
+{
+    "postTags": [
+        {
+            "Id": 1,
+            "PostId": 101,
+            "TagId": 201
+        },
+        {
+            "Id": 2,
+            "PostId": 102,
+            "TagId": 202
+        },
+        {
+            "Id": 3,
+            "PostId": 103,
+            "TagId": 203
+        },
+        {
+            "Id": 4,
+            "PostId": 104,
+            "TagId": 201
+        },
+        {
+            "Id": 5,
+            "PostId": 105,
+            "TagId": 204
+        },
+        {
+            "Id": 6,
+            "PostId": 106,
+            "TagId": 205
+        },
+        {
+            "Id": 7,
+            "PostId": 107,
+            "TagId": 202
+        },
+        {
+            "Id": 8,
+            "PostId": 108,
+            "TagId": 203
+        },
+        {
+            "Id": 9,
+            "PostId": 109,
+            "TagId": 206
+        },
+        {
+            "Id": 10,
+            "PostId": 110,
+            "TagId": 201
+        },
+        {
+            "Id": 11,
+            "PostId": 111,
+            "TagId": 205
+        },
+        {
+            "Id": 12,
+            "PostId": 112,
+            "TagId": 204
+        },
+        {
+            "Id": 13,
+            "PostId": 113,
+            "TagId": 202
+        },
+        {
+            "Id": 14,
+            "PostId": 114,
+            "TagId": 203
+        },
+        {
+            "Id": 15,
+            "PostId": 115,
+            "TagId": 201
+        },
+        {
+            "Id": 16,
+            "PostId": 116,
+            "TagId": 205
+        },
+        {
+            "Id": 17,
+            "PostId": 117,
+            "TagId": 204
+        },
+        {
+            "Id": 18,
+            "PostId": 118,
+            "TagId": 202
+        },
+        {
+            "Id": 19,
+            "PostId": 119,
+            "TagId": 206
+        },
+        {
+            "Id": 20,
+            "PostId": 120,
+            "TagId": 201
+        }
+    ]
+}

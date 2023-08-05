@@ -1,0 +1,84 @@
+{
+    "tags": [
+        {
+            "Id": 1,
+            "Label": "Programming"
+        },
+        {
+            "Id": 2,
+            "Label": "Cooking"
+        },
+        {
+            "Id": 3,
+            "Label": "Data Science"
+        },
+        {
+            "Id": 4,
+            "Label": "Travel Tips"
+        },
+        {
+            "Id": 5,
+            "Label": "Fitness Motivation"
+        },
+        {
+            "Id": 6,
+            "Label": "Art Inspiration"
+        },
+        {
+            "Id": 7,
+            "Label": "Book Recommendations"
+        },
+        {
+            "Id": 8,
+            "Label": "Photography Tips"
+        },
+        {
+            "Id": 9,
+            "Label": "Mental Health"
+        },
+        {
+            "Id": 10,
+            "Label": "Football"
+        },
+        {
+            "Id": 11,
+            "Label": "Web Development"
+        },
+        {
+            "Id": 12,
+            "Label": "Baking"
+        },
+        {
+            "Id": 13,
+            "Label": "Machine Learning"
+        },
+        {
+            "Id": 14,
+            "Label": "Adventure"
+        },
+        {
+            "Id": 15,
+            "Label": "Yoga"
+        },
+        {
+            "Id": 16,
+            "Label": "Painting Techniques"
+        },
+        {
+            "Id": 17,
+            "Label": "Fantasy Novels"
+        },
+        {
+            "Id": 18,
+            "Label": "Portrait Photography"
+        },
+        {
+            "Id": 19,
+            "Label": "Stress Management"
+        },
+        {
+            "Id": 20,
+            "Label": "Basketball"
+        }
+    ]
+}

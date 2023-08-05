@@ -1,0 +1,48 @@
+{
+    "categories": [
+        {
+            "Id": 1,
+            "Label": "Technology"
+        },
+        {
+            "Id": 2,
+            "Label": "Food and Cooking"
+        },
+        {
+            "Id": 3,
+            "Label": "Science"
+        },
+        {
+            "Id": 4,
+            "Label": "Travel"
+        },
+        {
+            "Id": 5,
+            "Label": "Fitness"
+        },
+        {
+            "Id": 6,
+            "Label": "Art and Design"
+        },
+        {
+            "Id": 7,
+            "Label": "Books and Literature"
+        },
+        {
+            "Id": 8,
+            "Label": "Photography"
+        },
+        {
+            "Id": 9,
+            "Label": "Health and Wellness"
+        },
+        {
+            "Id": 10,
+            "Label": "Sports"
+        },
+        {
+            "Id": 11,
+            "Label": "Business and Finance"
+        }
+    ]
+}
