@@ -371,5 +371,14 @@ app.MapGet("/users", () =>
     return users; // .OrderBy(x => x.Username);
 });
 
+//GET all tags
+
+app.MapGet("/tags", () =>
+{
+    List<Tag> listTags = tags.OrderBy(x => x.Label).ToList();
+    return listTags;
+});
+
+
 app.Run();
 

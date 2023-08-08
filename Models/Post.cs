@@ -9,7 +9,8 @@ public class Post
     public string Title { get; set; }
     public DateTime PublicationDate { get; set; }
     public string Content { get; set; }
-    //public List<Comments> Comments { get; set; }
-    //public List<PostTags> PostTags { get; set; }
-    //public List<Categories> Categories { get; set; }
+    public List<Comment> Comments { get; set; }
+    public List<PostTag> PostTags { get; set; }
+    public List<Tag> Tags { get; set; }
+    public List<Category> Categories { get; set; }
 }
