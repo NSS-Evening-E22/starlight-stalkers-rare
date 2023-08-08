@@ -407,7 +407,6 @@ app.MapGet("/users", () =>
 app.MapPost("/users", (User newUser) =>
 {
     newUser.Id = users.Max(st => st.Id) + 1;
-    newUser.CreatedOn = DateTime.Now;
     users.Add(newUser);
     return newUser;
 });
