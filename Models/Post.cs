@@ -11,5 +11,6 @@ public class Post
     public string Content { get; set; }
     public List<Comment> Comments { get; set; }
     public List<PostTag> PostTags { get; set; }
+    public List<Tag> Tags { get; set; }
     public List<Category> Categories { get; set; }
 }
