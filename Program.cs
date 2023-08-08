@@ -371,5 +371,14 @@ app.MapGet("/users", () =>
     return users; // .OrderBy(x => x.Username);
 });
 
+//Create new User
+app.MapPost("/users", (User newUser) =>
+{
+    newUser.Id = users.Max(st => st.Id) + 1;
+    newUser.CreatedOn = DateTime.Now;
+    users.Add(newUser);
+    return newUser;
+});
+
 app.Run();
 
