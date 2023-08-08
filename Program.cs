@@ -365,6 +365,38 @@ List<Category> categories = new List<Category>
 
 //Create Endpoints Here!!!
 
+//POST new comment
+app.MapPost("/posts/{postId}/comments", (int postId, Comment comment) =>
+{
+
+    comment.Id = comments.Count + 1;
+    comments.Add(comment);
+
+    return Results.Ok(comment);
+});
+
+//GET a post's comment
+app.MapGet("/posts/{postId}/comments", (int postId) =>
+{
+    var postComments = comments.Where(c => c.PostId == postId).ToList();
+    return Results.Ok(postComments);
+});
+
+//DELETE a post's comment
+app.MapDelete("/posts/{postId}/comments/{commentId}", (int postId, int commentId) =>
+{
+    var commentToDelete = comments.FirstOrDefault(c => c.Id == commentId && c.PostId == postId);
+
+    if (commentToDelete == null)
+    {
+        return Results.NotFound("Comment not found.");
+    }
+
+    comments.Remove(commentToDelete);
+
+    return Results.NoContent();
+});
+
 //GET all users
 app.MapGet("/users", () =>
 {
