@@ -408,12 +408,21 @@ app.MapGet("/users", () =>
     return users; // .OrderBy(x => x.Username);
 });
 
-//POSTS
+
+//Create new User
+app.MapPost("/users", (User newUser) =>
+{
+    newUser.Id = users.Max(st => st.Id) + 1;
+    users.Add(newUser);
+    return newUser;
+
+//GET All Posts
 app.MapGet("/posts", () =>
 {
     return posts;
 });
 
+//GET Post Details
 app.MapGet("/posts/{id}", (int id) =>
 {
     Post post = posts.FirstOrDefault(p => p.Id == id);
@@ -424,6 +433,7 @@ app.MapGet("/posts/{id}", (int id) =>
     return Results.Ok(post);
 });
 
+//POST New Post
 app.MapPost("/posts", (Post post) =>
 {
     post.Id = posts.Max(p => p.Id) + 1;
