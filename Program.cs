@@ -421,6 +421,7 @@ app.MapPost("/users", (User newUser) =>
     newUser.Id = users.Max(st => st.Id) + 1;
     users.Add(newUser);
     return newUser;
+});
 
 //GET All Posts
 app.MapGet("/posts", () =>
@@ -447,5 +448,12 @@ app.MapPost("/posts", (Post post) =>
     return post;
 });
 
-app.Run();
+//DELETE Post
+app.MapDelete("/posts/{id}", (int id) =>
+{
+    Post post = posts.FirstOrDefault(p => p.Id == id);
+    posts.Remove(post);
+    return posts;
+});
 
+app.Run();
