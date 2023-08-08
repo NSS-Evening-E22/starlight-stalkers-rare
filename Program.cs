@@ -82,6 +82,7 @@ List<User> users = new List<User>
     Active = true
   }
 };
+
 List<Post> posts = new List<Post>
 {
     new Post
@@ -91,7 +92,7 @@ List<Post> posts = new List<Post>
         CategoryId = 1,
         Title = "Introduction to Programming",
         PublicationDate = new DateTime(2008, 5, 1, 8, 30, 52),
-         Content = "In this article, we will introduce the basics of programming."
+        Content = "In this article, we will introduce the basics of programming."
     },
     new Post
     {
@@ -148,6 +149,7 @@ List<Post> posts = new List<Post>
         Content = "Begin your photography journey with essential tips and techniques."
     }
 };
+
 List<Tag> tags = new List<Tag>
 {
   new Tag
@@ -201,6 +203,7 @@ List<Tag> tags = new List<Tag>
     Label = "Stress Management"
   }
 };
+
 List<PostTag> postTags = new List<PostTag>
 {
   new PostTag
@@ -246,6 +249,7 @@ List<PostTag> postTags = new List<PostTag>
     TagId = 306
   }
 };
+
 List<Comment> comments = new List<Comment>
 {
   new Comment
@@ -319,6 +323,7 @@ List<Comment> comments = new List<Comment>
     Content = "Can't wait to read more articles from you. Well done!"
   }
 };
+
 List<Category> categories = new List<Category>
 {
         new Category
@@ -403,12 +408,37 @@ app.MapGet("/users", () =>
     return users; // .OrderBy(x => x.Username);
 });
 
+
 //Create new User
 app.MapPost("/users", (User newUser) =>
 {
     newUser.Id = users.Max(st => st.Id) + 1;
     users.Add(newUser);
     return newUser;
+
+//GET All Posts
+app.MapGet("/posts", () =>
+{
+    return posts;
+});
+
+//GET Post Details
+app.MapGet("/posts/{id}", (int id) =>
+{
+    Post post = posts.FirstOrDefault(p => p.Id == id);
+    if (post == null)
+    {
+        return Results.NotFound();
+    }
+    return Results.Ok(post);
+});
+
+//POST New Post
+app.MapPost("/posts", (Post post) =>
+{
+    post.Id = posts.Max(p => p.Id) + 1;
+    posts.Add(post);
+    return post;
 });
 
 app.Run();
