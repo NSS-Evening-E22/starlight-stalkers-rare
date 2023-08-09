@@ -422,6 +422,7 @@ app.MapPost("/users", (User newUser) =>
     newUser.Id = users.Max(st => st.Id) + 1;
     users.Add(newUser);
     return newUser;
+});
 
 //GET All Posts
 app.MapGet("/posts", () =>
@@ -447,6 +448,15 @@ app.MapPost("/posts", (Post post) =>
     posts.Add(post);
     return post;
 });
+
+//DELETE Post
+app.MapDelete("/posts/{id}", (int id) =>
+{
+    Post post = posts.FirstOrDefault(p => p.Id == id);
+    posts.Remove(post);
+    return posts;
+});
+
 //create category
 app.MapPost("/categories/{Id}", (Category category) =>
 {
@@ -461,12 +471,4 @@ app.MapGet("/categories", () =>
     return categories;
 });
 
-//filter all posts by category id
-//app.MapGet("/posts/categories/{Id}", (int Id) =>
-//{
-//    var filteredPosts = posts.Where(post => categoryIds.Contains(post.CategoryId));
-//    return Results.Ok(filteredPosts);
-
-//});
 app.Run();
-
