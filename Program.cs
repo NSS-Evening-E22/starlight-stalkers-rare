@@ -1,3 +1,4 @@
+using System.Linq;
 using starlight_stalkers_rare.Models;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -421,6 +422,7 @@ app.MapPost("/users", (User newUser) =>
     newUser.Id = users.Max(st => st.Id) + 1;
     users.Add(newUser);
     return newUser;
+});
 
 //GET All Posts
 app.MapGet("/posts", () =>
@@ -445,6 +447,20 @@ app.MapPost("/posts", (Post post) =>
     post.Id = posts.Max(p => p.Id) + 1;
     posts.Add(post);
     return post;
+});
+
+// ADD Tags to a Post
+app.MapPost("/posts/{id}/tags", (int id, int tagId) =>
+{
+    int postTagsId = postTags.Max(p => p.Id) + 1;
+    PostTag newPostTag = new PostTag()
+    {
+        Id = postTagsId,
+        TagId = tagId,
+        PostId = id
+    };
+    postTags.Add(newPostTag);
+    return postTags;
 });
 
 app.Run();
