@@ -1,3 +1,4 @@
+using Microsoft.Extensions.Hosting;
 using starlight_stalkers_rare.Models;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -408,6 +409,12 @@ app.MapGet("/user/all", () =>
     return users.OrderBy(x => x.Username);
 });
 
+//GET all tags
+app.MapGet("/tags", () =>
+{
+    List<Tag> listTags = tags.OrderBy(x => x.Label).ToList();
+    return listTags;
+});
 
 //Create new User
 app.MapPost("/user/new", (User newUser) =>
@@ -467,5 +474,26 @@ app.MapPost("/posts", (Post post) =>
     return post;
 });
 
-app.Run();
+//DELETE Post
+app.MapDelete("/posts/{id}", (int id) =>
+{
+    Post post = posts.FirstOrDefault(p => p.Id == id);
+    posts.Remove(post);
+    return posts;
+});
 
+//create category
+app.MapPost("/categories/{Id}", (Category category) =>
+{
+    category.Id = categories.Max(cat => cat.Id) + 1;
+    categories.Add(category);
+    return category;
+});
+
+//view all categories
+app.MapGet("/categories", () =>
+{
+    return categories;
+});
+
+app.Run();
