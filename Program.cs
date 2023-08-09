@@ -1,4 +1,5 @@
-using System.Linq;
+
+using Microsoft.Extensions.Hosting;
 using starlight_stalkers_rare.Models;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -404,9 +405,9 @@ app.MapDelete("/posts/{postId}/comments/{commentId}", (int postId, int commentId
 });
 
 //GET all users
-app.MapGet("/users", () =>
+app.MapGet("/user/all", () =>
 {
-    return users; // .OrderBy(x => x.Username);
+    return users.OrderBy(x => x.Username);
 });
 
 //GET all tags
@@ -417,12 +418,38 @@ app.MapGet("/tags", () =>
 });
 
 //Create new User
-app.MapPost("/users", (User newUser) =>
+app.MapPost("/user/new", (User newUser) =>
 {
     newUser.Id = users.Max(st => st.Id) + 1;
     users.Add(newUser);
     return newUser;
 });
+
+
+//Delete User
+app.MapDelete("/user/{id}", (int id) =>
+{
+    users.RemoveAll(u => u.Id == id);
+});
+
+//Update Service Ticket
+app.MapPut("/user/{id}/update", (int id, User user) =>
+{
+    User userToUpdate = users.FirstOrDefault(st => st.Id == id);
+    int userIndex = users.IndexOf(userToUpdate);
+    if (userToUpdate == null)
+    {
+        return Results.NotFound();
+    }
+    // the id in the request route doesn't match the id from the ticket in the request body. That's a bad request!
+    if (id != user.Id)
+    {
+        return Results.BadRequest();
+    }
+    users[userIndex] = user;
+    return Results.Ok();
+});
+
 
 //GET All Posts
 app.MapGet("/posts", () =>
@@ -449,6 +476,7 @@ app.MapPost("/posts", (Post post) =>
     return post;
 });
 
+
 // ADD Tags to a Post
 app.MapPost("/posts/{id}/tags", (int id, int tagId) =>
 {
@@ -463,5 +491,26 @@ app.MapPost("/posts/{id}/tags", (int id, int tagId) =>
     return postTags;
 });
 
-app.Run();
+//DELETE Post
+app.MapDelete("/posts/{id}", (int id) =>
+{
+    Post post = posts.FirstOrDefault(p => p.Id == id);
+    posts.Remove(post);
+    return posts;
+});
 
+//create category
+app.MapPost("/categories/{Id}", (Category category) =>
+{
+    category.Id = categories.Max(cat => cat.Id) + 1;
+    categories.Add(category);
+    return category;
+});
+
+//view all categories
+app.MapGet("/categories", () =>
+{
+    return categories;
+});
+
+app.Run();
