@@ -403,18 +403,44 @@ app.MapDelete("/posts/{postId}/comments/{commentId}", (int postId, int commentId
 });
 
 //GET all users
-app.MapGet("/users", () =>
+app.MapGet("/user/all", () =>
 {
-    return users; // .OrderBy(x => x.Username);
+    return users.OrderBy(x => x.Username);
 });
 
 
 //Create new User
-app.MapPost("/users", (User newUser) =>
+app.MapPost("/user/new", (User newUser) =>
 {
     newUser.Id = users.Max(st => st.Id) + 1;
     users.Add(newUser);
     return newUser;
+});
+
+//Delete User
+app.MapDelete("/user/{id}", (int id) =>
+{
+    users.RemoveAll(u => u.Id == id);
+});
+
+//Update Service Ticket
+app.MapPut("/user/{id}/update", (int id, User user) =>
+{
+    User userToUpdate = users.FirstOrDefault(st => st.Id == id);
+    int userIndex = users.IndexOf(userToUpdate);
+    if (userToUpdate == null)
+    {
+        return Results.NotFound();
+    }
+    // the id in the request route doesn't match the id from the ticket in the request body. That's a bad request!
+    if (id != user.Id)
+    {
+        return Results.BadRequest();
+    }
+    users[userIndex] = user;
+    return Results.Ok();
+});
+
 
 //GET All Posts
 app.MapGet("/posts", () =>
