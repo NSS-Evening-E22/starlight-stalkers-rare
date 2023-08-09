@@ -1,3 +1,4 @@
+
 using Microsoft.Extensions.Hosting;
 using starlight_stalkers_rare.Models;
 
@@ -424,6 +425,7 @@ app.MapPost("/user/new", (User newUser) =>
     return newUser;
 });
 
+
 //Delete User
 app.MapDelete("/user/{id}", (int id) =>
 {
@@ -472,6 +474,21 @@ app.MapPost("/posts", (Post post) =>
     post.Id = posts.Max(p => p.Id) + 1;
     posts.Add(post);
     return post;
+});
+
+
+// ADD Tags to a Post
+app.MapPost("/posts/{id}/tags", (int id, int tagId) =>
+{
+    int postTagsId = postTags.Max(p => p.Id) + 1;
+    PostTag newPostTag = new PostTag()
+    {
+        Id = postTagsId,
+        TagId = tagId,
+        PostId = id
+    };
+    postTags.Add(newPostTag);
+    return postTags;
 });
 
 //DELETE Post
