@@ -1,3 +1,4 @@
+using Microsoft.Extensions.Hosting;
 using starlight_stalkers_rare.Models;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -446,6 +447,26 @@ app.MapPost("/posts", (Post post) =>
     posts.Add(post);
     return post;
 });
+//create category
+app.MapPost("/categories/{Id}", (Category category) =>
+{
+    category.Id = categories.Max(cat => cat.Id) + 1;
+    categories.Add(category);
+    return category;
+});
 
+//view all categories
+app.MapGet("/categories", () =>
+{
+    return categories;
+});
+
+//filter all posts by category id
+//app.MapGet("/posts/categories/{Id}", (int Id) =>
+//{
+//    var filteredPosts = posts.Where(post => categoryIds.Contains(post.CategoryId));
+//    return Results.Ok(filteredPosts);
+
+//});
 app.Run();
 
