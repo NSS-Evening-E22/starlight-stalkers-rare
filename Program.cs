@@ -99,7 +99,7 @@ List<Post> posts = new List<Post>
     new Post
     {
         Id = 202,
-        UserId = 102,
+        UserId = 101,
         CategoryId = 2,
         Title = "The Art of Cooking",
         PublicationDate = new DateTime(2008, 5, 1, 8, 30, 52),
@@ -430,6 +430,18 @@ app.MapPost("/user/new", (User newUser) =>
 app.MapDelete("/user/{id}", (int id) =>
 {
     users.RemoveAll(u => u.Id == id);
+});
+
+//Get User Posts
+app.MapGet("/user/{id}/posts", (int id) =>
+{
+    User user = users.FirstOrDefault(x => x.Id == id);
+    if (user == null)
+    {
+        return Results.NotFound();
+    }
+    user.Posts = posts.Where(st => st.UserId == id).ToList();
+    return Results.Ok(user);
 });
 
 //Update Service Ticket
