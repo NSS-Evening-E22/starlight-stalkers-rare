@@ -542,5 +542,22 @@ app.MapGet("/categories", () =>
 });
 
 
+//Subscribe to User
+
+app.MapPost("/subscription", (int id, int followerId, int authorId) =>
+{
+int subscriptionId = subscriptions.Max(p => p.Id) + 1;
+Subscription newSub = new Subscription()
+{
+Id = subscriptionId,
+FollowerId = followerId,
+AuthorId = authorId
+};
+subscriptions.Add(newSub);
+return subscriptions;
+});
+
+
+
 
 app.Run();
