@@ -370,6 +370,22 @@ List<Category> categories = new List<Category>
         }
 };
 
+List<Subscription> subscriptions = new List<Subscription>
+{
+    new Subscription
+    {
+        Id = 1,
+        FollowerId = 105,
+        AuthorId = 101
+    }, 
+    new Subscription
+    {
+        Id = 2,
+        FollowerId = 105,
+        AuthorId = 102
+    }
+};
+
 //Create Endpoints Here!!!
 
 //POST new comment
@@ -524,5 +540,7 @@ app.MapGet("/categories", () =>
 {
     return categories;
 });
+
+
 
 app.Run();
