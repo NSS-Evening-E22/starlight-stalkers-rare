@@ -541,6 +541,12 @@ app.MapGet("/categories", () =>
     return categories;
 });
 
+//DELETE PostTags
+app.MapDelete("/posts/{postId}/tags", (int postId, int tagId) =>
+{
+    postTags.RemoveAll(pt =>  pt.PostId == postId && pt.TagId == tagId);
+    return postTags;
+});
 
 
 app.Run();
