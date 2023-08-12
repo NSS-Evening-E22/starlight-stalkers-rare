@@ -387,6 +387,21 @@ List<Subscription> subscriptions = new List<Subscription>
     }
 };
 
+List<Reaction> reactiions = new List<Reaction>
+{
+    new Reaction { Id = 1, Emoji = 0x1F604 },
+    new Reaction { Id = 2, Emoji = 0x2764 },
+    new Reaction { Id = 3, Emoji = 0x1F44D },
+    new Reaction { Id = 4, Emoji = 0x1F626 }
+};
+
+List<PostReaction> postReactions = new List<PostReaction>
+{
+    new PostReaction { Id = 1, ReactionId = 1, UserId = 101, PostId = 201 },
+    new PostReaction { Id = 2, ReactionId = 2, UserId = 102, PostId = 202 },
+    new PostReaction { Id = 3, ReactionId = 3, UserId = 103, PostId = 203 },
+    new PostReaction { Id = 4, ReactionId = 4, UserId = 104, PostId = 204 }
+};
 //Create Endpoints Here!!!
 
 //POST new comment
@@ -596,5 +611,29 @@ app.MapGet("/subscription/{id}/post", (int id) =>
 
 });
 
+//ADD Reaction To Post
+app.MapPost("/posts/{postId}/reactions", (int postId, PostReaction newReaction) =>
+{
+    int postReactionId = postReactions.Max(pr => pr.Id) + 1;
+
+    PostReaction postReactionToAdd = new PostReaction()
+    {
+        Id = postReactionId,
+        ReactionId = newReaction.ReactionId,
+        UserId = newReaction.UserId,
+        PostId = postId
+    };
+
+    postReactions.Add(postReactionToAdd);
+
+    return postReactions;
+});
+
+//DELETE Post Reaction
+app.MapDelete("/posts/{postId}/reactions/{reactionId}", (int postId, int reactionId) =>
+{
+    postReactions.RemoveAll(pr => pr.PostId == postId && pr.ReactionId == reactionId);
+    return postReactions;
+});
 
 app.Run();
