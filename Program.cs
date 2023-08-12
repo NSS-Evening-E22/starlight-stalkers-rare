@@ -370,6 +370,22 @@ List<Category> categories = new List<Category>
         }
 };
 
+List<Subscription> subscriptions = new List<Subscription>
+{
+    new Subscription
+    {
+        Id = 1,
+        FollowerId = 105,
+        AuthorId = 101
+    }, 
+    new Subscription
+    {
+        Id = 2,
+        FollowerId = 105,
+        AuthorId = 102
+    }
+};
+
 //Create Endpoints Here!!!
 
 //POST new comment
@@ -525,12 +541,12 @@ app.MapGet("/categories", () =>
     return categories;
 });
 
+//DELETE PostTags
 app.MapDelete("/posts/{postId}/tags", (int postId, int tagId) =>
 {
     postTags.RemoveAll(pt =>  pt.PostId == postId && pt.TagId == tagId);
     return postTags;
 });
-
 
 
 app.Run();
