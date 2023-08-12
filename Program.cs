@@ -1,6 +1,7 @@
 
 using Microsoft.Extensions.Hosting;
 using starlight_stalkers_rare.Models;
+using System.IO;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -546,6 +547,53 @@ app.MapDelete("/posts/{postId}/tags", (int postId, int tagId) =>
 {
     postTags.RemoveAll(pt =>  pt.PostId == postId && pt.TagId == tagId);
     return postTags;
+});
+
+//View all subscriptions
+app.MapGet("/subscription", () =>
+{
+    return subscriptions;
+});
+
+//Subscribe to User
+app.MapPost("/subscription", (int followerId, int authorId) =>
+{
+int subscriptionId = subscriptions.Max(p => p.Id) + 1;
+Subscription newSub = new Subscription()
+{
+Id = subscriptionId,
+FollowerId = followerId,
+AuthorId = authorId,
+CreatedOn = DateTime.Now
+};
+subscriptions.Add(newSub);
+
+});
+
+//Delete User
+app.MapDelete("/subscription/{followerId}/{authorId}", (int followerId, int authorId) =>
+{
+    subscriptions.RemoveAll(u => u.FollowerId == followerId && u.AuthorId == authorId);
+});
+
+//View Posts for all subscriptions
+app.MapGet("/subscription/{id}/post", (int id) =>
+{
+    var subList = subscriptions.Where(s => s.FollowerId == id).ToList();
+    List<Post> postList= new List<Post>();
+  
+    var postsFromSubscriptions = from subscription in subscriptions
+                                 where subscription.FollowerId == id
+                                 join post in posts on subscription.AuthorId equals post.UserId
+                                 select post;
+
+    foreach (var post in postsFromSubscriptions)
+    {
+        postList.Add(post);
+    }
+
+    return postList;
+
 });
 
 
